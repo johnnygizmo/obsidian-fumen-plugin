@@ -1,6 +1,6 @@
 {
 	"name": "johnnygizmo-fumen",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "This is a plugin for Obsidian (https://obsidian.md) that renders Fumen Chord Charts",
 	"main": "main.js",
 	"type": "module",
