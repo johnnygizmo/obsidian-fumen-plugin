@@ -1,8 +1,17 @@
-/*
+.fumen-view {
+	overflow: auto;
+	padding: 10px;
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.fumen-chart canvas {
+	display: block;
+}
 
-If your plugin does not need CSS, delete this file.
+.fumen-message {
+	color: var(--text-muted);
+}
 
-*/
+.fumen-error {
+	color: var(--text-error);
+	white-space: pre-wrap;
+}

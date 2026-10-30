@@ -1,18 +1,18 @@
 import { App, PluginSettingTab, Setting } from 'obsidian';
-import MyPlugin from './main';
+import type FumenPlugin from './main';
 
-export interface MyPluginSettings {
-	mySetting: string;
+export interface FumenSettings {
+	textSize: number;
 }
 
-export const DEFAULT_SETTINGS: MyPluginSettings = {
-	mySetting: 'default',
+export const DEFAULT_SETTINGS: FumenSettings = {
+	textSize: 1,
 };
 
-export class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
+export class FumenSettingTab extends PluginSettingTab {
+	plugin: FumenPlugin;
 
-	constructor(app: App, plugin: MyPlugin) {
+	constructor(app: App, plugin: FumenPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}
@@ -23,15 +23,17 @@ export class SampleSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName('Settings #1')
-			.setDesc("It's a secret")
-			.addText((text) =>
-				text
-					.setPlaceholder('Enter your secret')
-					.setValue(this.plugin.settings.mySetting)
+			.setName('Chart size')
+			.setDesc('Scale of the rendered chart (default 1).')
+			.addSlider((slider) =>
+				slider
+					.setLimits(0.5, 2, 0.1)
+					.setDynamicTooltip()
+					.setValue(this.plugin.settings.textSize)
 					.onChange(async (value) => {
-						this.plugin.settings.mySetting = value;
+						this.plugin.settings.textSize = value;
 						await this.plugin.saveSettings();
+						this.plugin.refreshViews();
 					}),
 			);
 	}
